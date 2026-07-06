@@ -1,0 +1,6 @@
+{
+  "name": "OpportunityMiner AI",
+  "description": "A multi-agent AI system that discovers high-potential startup opportunities by analyzing market niches, identifying customer pain points, mapping emerging trends, and generating comprehensive business concepts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
