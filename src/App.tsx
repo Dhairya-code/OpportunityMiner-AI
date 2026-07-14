@@ -18,6 +18,7 @@ import { BackgroundGlow } from "./components/BackgroundGlow.jsx";
 import { StepProgress } from "./components/StepProgress.jsx";
 import { InteractiveDashboard } from "./components/InteractiveDashboard.jsx";
 import { MarkdownReport } from "./components/MarkdownReport.jsx";
+import { LandingPage } from "./components/LandingPage.jsx";
 import { PipelineState } from "./types.js";
 
 const PRESETS = [
@@ -125,83 +126,12 @@ export default function App() {
       <main className="flex-1 w-full max-w-7xl mx-auto flex items-center justify-center" id="app-main">
         {/* 1. INITIAL LANDING VIEW */}
         {activeStep === 0 && (
-          <div className="w-full max-w-3xl text-center space-y-8 py-12" id="landing-view">
-            <div className="space-y-4">
-              <span className="px-3 py-1 rounded-full bg-violet-500/10 text-violet-400 border border-violet-500/20 font-mono text-xs font-semibold">
-                Multi-Agent Intelligence Platform
-              </span>
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
-                Mine Startup Gaps in <br />
-                <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-cyan-400 bg-clip-text text-transparent">
-                  Any Industry Niche
-                </span>
-              </h2>
-              <p className="text-gray-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-                Unlock VC-grade opportunity formulation. Type in an unmapped niche and watch a specialized pipeline of AI agents detail pain points, map emerging tech catalysts, dissect incumbents, and draft complete startup models.
-              </p>
-            </div>
-
-            {/* Glowing Search Box Container */}
-            <div className="glass-panel p-2 rounded-2xl border border-white/10 max-w-2xl mx-auto shadow-2xl shadow-black/40" id="search-box">
-              <div className="flex flex-col sm:flex-row gap-2">
-                <div className="flex-1 relative flex items-center">
-                  <Search className="absolute left-4 h-5 w-5 text-gray-500" />
-                  <input
-                    type="text"
-                    value={niche}
-                    onChange={(e) => setNiche(e.target.value)}
-                    placeholder="Enter an industry niche (e.g., 'underwater hull cleaning')..."
-                    className="w-full pl-12 pr-4 py-3 bg-transparent text-white placeholder-gray-500 border-none rounded-xl focus:outline-none focus:ring-0 text-sm md:text-base"
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" && niche.trim()) {
-                        handleAnalyze(niche, false);
-                      }
-                    }}
-                  />
-                </div>
-                <div className="flex gap-2">
-                  <button
-                    onClick={() => handleAnalyze(niche, true)}
-                    disabled={!niche.trim()}
-                    className="flex-1 sm:flex-none px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 font-mono text-xs font-semibold border border-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-                  >
-                    Research Only
-                  </button>
-                  <button
-                    onClick={() => handleAnalyze(niche, false)}
-                    disabled={!niche.trim()}
-                    className="flex-1 sm:flex-none px-6 py-3 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-mono text-xs font-bold disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-violet-500/20"
-                  >
-                    Mine Concept
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Presets Grid */}
-            <div className="space-y-3" id="presets-container">
-              <span className="font-mono text-[10px] font-bold text-gray-500 tracking-wider uppercase">
-                Explore Emerging Greenfield Samples
-              </span>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
-                {PRESETS.map((preset, i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      setNiche(preset);
-                      handleAnalyze(preset, false);
-                    }}
-                    className="p-4 rounded-xl glass-panel hover:bg-white/5 border border-white/5 text-left transition-all group flex items-center justify-between"
-                  >
-                    <span className="text-xs text-gray-300 font-medium group-hover:text-white truncate pr-2">
-                      {preset}
-                    </span>
-                    <ArrowRight className="h-4 w-4 text-gray-500 group-hover:text-cyan-400 group-hover:translate-x-1 transition-all flex-shrink-0" />
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
+          <LandingPage 
+            niche={niche}
+            setNiche={setNiche}
+            onAnalyze={handleAnalyze}
+            presets={PRESETS}
+          />
         )}
 
         {/* 2. LOADING PROGRESS VIEW */}
